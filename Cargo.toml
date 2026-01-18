@@ -1,0 +1,53 @@
+[package]
+name = "order-book-hybrid"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+
+actix-web = "4.4"
+actix-web-actors = "4.3"
+actix-rt = "2.9"
+actix = "0.13"
+actix-cors = "0.7"
+
+
+crossbeam = "0.8"
+dashmap = "5.5"
+parking_lot = "0.12"
+
+
+tokio = { version = "1.35", features = ["full"] }
+tokio-tungstenite = { version = "0.21", features = ["native-tls"] }
+
+
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+chrono = { version = "0.4", features = ["serde"] }
+uuid = { version = "1.6", features = ["v4", "serde"] }
+futures-util = "0.3"
+url = "2.5"
+
+
+env_logger = "0.11"
+log = "0.4"
+
+[dev-dependencies]
+criterion = "0.5"
+
+
+[profile.release]
+opt-level = 3              
+lto = "fat"               
+codegen-units = 1         
+panic = "abort"          
+strip = true              
+
+
+[profile.dev]
+opt-level = 1
+
+[[bench]]
+name = "orderbook_benchmark"
+harness = false
